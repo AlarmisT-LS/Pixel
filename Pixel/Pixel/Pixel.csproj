@@ -80,12 +80,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdmissionWindow.xaml.cs">
+      <DependentUpon>AdmissionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="PerformanceWindow.xaml.cs">
+      <DependentUpon>PerformanceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShipmentWindow.xaml.cs">
+      <DependentUpon>ShipmentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TradeTransactions.cs" />
     <Compile Include="VideoCard.cs" />
+    <Page Include="AdmissionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -98,7 +111,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PerformanceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShipmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

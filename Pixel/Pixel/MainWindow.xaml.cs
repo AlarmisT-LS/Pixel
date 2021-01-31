@@ -101,9 +101,9 @@ namespace Pixel
 
         private void Button_Performance_Click(object sender, RoutedEventArgs e)
         {
-            //PerformanceWindow performanceWindow = new PerformanceWindow(user);
-            //performanceWindow.Show();
-            //Close();
+            PerformanceWindow performanceWindow = new PerformanceWindow();
+            performanceWindow.Show();
+            Close();
         }
 
         private void Button_Report_Click(object sender, RoutedEventArgs e)
@@ -115,16 +115,16 @@ namespace Pixel
 
         private void Button_Shipment_Click(object sender, RoutedEventArgs e)
         {
-            //ShipmentWindow shipmentWindow = new ShipmentWindow(user);
-            //shipmentWindow.Show();
-            //Close();
+            ShipmentWindow shipmentWindow = new ShipmentWindow();
+            shipmentWindow.Show();
+            Close();
         }
 
         private void Button_Admission_Click(object sender, RoutedEventArgs e)
         {
-            //AdmissionWindow admissionWindow = new AdmissionWindow(user);
-            //admissionWindow.Show();
-            //Close();
+            AdmissionWindow admissionWindow = new AdmissionWindow();
+            admissionWindow.Show();
+            Close();
         }
     }
 }

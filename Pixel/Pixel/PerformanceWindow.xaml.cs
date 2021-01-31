@@ -15,43 +15,40 @@ using System.Windows.Shapes;
 namespace Pixel
 {
     /// <summary>
-    /// Логика взаимодействия для ReportWindow.xaml
+    /// Логика взаимодействия для PerformanceWindow.xaml
     /// </summary>
-    public partial class ReportWindow : Window
+    public partial class PerformanceWindow : Window
     {
         private ApplicationContext db;
-        public ReportWindow()
+        public PerformanceWindow()
         {
             InitializeComponent();
-            db = new ApplicationContext();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<VideoCard> graphicsCards = db.VideoCards.ToList();
-            lstw.ItemsSource = graphicsCards;
+            db = new ApplicationContext();
+            List<TradeTransaction> tradeTransactions = db.TradeTransactions.ToList();
+            listView.ItemsSource = tradeTransactions;
         }
-        private void Button_MainWindow_Click(object sender, RoutedEventArgs e)
+        private void Button_Report_Click(object sender, RoutedEventArgs e)
+        {
+            ReportWindow reportWindow = new ReportWindow();
+            reportWindow.Show();
+            Close();
+
+        }
+        private void Button_Admission_Click(object sender, RoutedEventArgs e)
+        {
+            AdmissionWindow admissionWindow = new AdmissionWindow();
+            admissionWindow.Show();
+            Close();
+        }
+        private void Button_Input_Click(object sender, RoutedEventArgs e)
         {
             MainWindow inputWindow = new MainWindow();
             inputWindow.Show();
             Close();
         }
-
-        private void Button_Admission_Click(object sender, RoutedEventArgs e)
-        {
-            AdmissionWindow admission = new AdmissionWindow();
-            admission.Show();
-            Close();
-        }
-
-        private void Button_Performance_Click(object sender, RoutedEventArgs e)
-        {
-            PerformanceWindow performanceWindow = new PerformanceWindow();
-            performanceWindow.Show();
-            Close();
-        }
-
-
         private void Button_Shipment_Click(object sender, RoutedEventArgs e)
         {
             ShipmentWindow shipmentWindow = new ShipmentWindow();
