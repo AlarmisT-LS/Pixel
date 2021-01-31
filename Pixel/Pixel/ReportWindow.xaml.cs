@@ -25,6 +25,12 @@ namespace Pixel
             InitializeComponent();
             db = new ApplicationContext();
         }
+        private void Button_Input_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow inputWindow = new MainWindow();
+            inputWindow.Show();
+            Close();
+        }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             List<VideoCard> graphicsCards = new List<VideoCard>();
@@ -60,6 +66,10 @@ namespace Pixel
         {
             ShipmentWindow shipmentWindow = new ShipmentWindow();
             shipmentWindow.Show();
+            Close();
+        }
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }

@@ -125,5 +125,9 @@ namespace Pixel
             admissionWindow.Show();
             Close();
         }
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

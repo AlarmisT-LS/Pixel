@@ -138,5 +138,10 @@ namespace Pixel
             CardList.Text = "";
             textBoxAmount.Text = "";
         }
+
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
