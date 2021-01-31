@@ -60,9 +60,9 @@ namespace Pixel
 
             List<string> listCard = new List<string>();
             db = new ApplicationContext();
-            List<VideoCard> videoCards = db.VideoCards.ToList();
             await Task.Run(() =>
             {
+                List<VideoCard> videoCards = db.VideoCards.ToList();
                 int i = 0;
                 foreach (var it in videoCards)
                 {
@@ -70,9 +70,6 @@ namespace Pixel
                     i++;
                 }
             });
-
-
-
             List<string> listNumber = new List<string>();
             await Task.Run(() =>
             {
@@ -85,7 +82,7 @@ namespace Pixel
             yearsList.ItemsSource = new List<string>() { "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" };
         }
 
-        private void Button_Add_Click(object sender, RoutedEventArgs e)
+        private async void Button_Add_Click(object sender, RoutedEventArgs e)
         {
             ClearComboBoxBorderBrush();
             if (textBoxProvider.Text.Length == 0)
@@ -105,13 +102,18 @@ namespace Pixel
 
             else
             {
-                List<VideoCard> videoCards = db.VideoCards.ToList();
-                foreach (var item in videoCards)
+                string str = CardList.Text, number = textBoxAmount.Text;
+                await Task.Run(() =>
                 {
-                    if (item.CardName == CardList.Text)
-                        item.Amount += Convert.ToInt32(textBoxAmount.Text);
-                }
-                db.TradeTransactions.Add(new TradeTransaction(CardList.Text,  $"{numberList.Text}.{monthList.Text}.{yearsList.Text}", "Добавлено", Convert.ToInt32(textBoxAmount.Text)));
+                    List<VideoCard> videoCards = db.VideoCards.ToList();
+                    foreach (var item in videoCards)
+                    {
+                        if (item.CardName == str)
+                            item.Amount += Convert.ToInt32(number);
+                    }
+
+                });
+                db.TradeTransactions.Add(new TradeTransaction(CardList.Text, $"{numberList.Text}.{monthList.Text}.{yearsList.Text}", "Добавлено", Convert.ToInt32(textBoxAmount.Text)));
                 db.SaveChanges();
                 ClearTextComboBox();
             }

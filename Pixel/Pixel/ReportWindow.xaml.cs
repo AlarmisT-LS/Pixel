@@ -25,9 +25,13 @@ namespace Pixel
             InitializeComponent();
             db = new ApplicationContext();
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<VideoCard> graphicsCards = db.VideoCards.ToList();
+            List<VideoCard> graphicsCards = new List<VideoCard>();
+            await Task.Run(() => 
+            {
+                graphicsCards = db.VideoCards.ToList();
+            });
             lstw.ItemsSource = graphicsCards;
         }
         private void Button_MainWindow_Click(object sender, RoutedEventArgs e)

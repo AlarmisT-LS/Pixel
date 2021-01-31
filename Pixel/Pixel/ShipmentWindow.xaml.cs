@@ -28,10 +28,11 @@ namespace Pixel
         {
             //Добовление листа видеокарт 
             List<string> listCard = new List<string>();
+            List<string> listNumber = new List<string>();
             db = new ApplicationContext();
-            List<VideoCard> videoCards = db.VideoCards.ToList();
             await Task.Run(() =>
             {
+                List<VideoCard> videoCards = db.VideoCards.ToList();
                 int i = 0;
                 foreach (var it in videoCards)
                 {
@@ -42,7 +43,6 @@ namespace Pixel
 
 
             //Добавление листа чисел, месяцев, годов
-            List<string> listNumber = new List<string>();
             await Task.Run(() =>
             {
                 for (int i = 1; i <= 31; i++)
@@ -53,9 +53,10 @@ namespace Pixel
             monthList.ItemsSource = new List<string>() { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
             yearsList.ItemsSource = new List<string>() { "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" };
         }
-        private void Button_Add_Click(object sender, RoutedEventArgs e)
+        private async void Button_Add_Click(object sender, RoutedEventArgs e)
         {
             ClearComboBoxBorderBrush();
+            bool TemporaryVariableBool = await CheckForNegationAsync(CardList.Text, textBoxAmount.Text);
             if (textBoxProvider.Text.Length == 0)
                 textBoxProvider.BorderBrush = Brushes.Red;
             else if (numberList.Text.Length == 0)
@@ -70,19 +71,53 @@ namespace Pixel
                 textBoxAmount.BorderBrush = Brushes.Red;
             else if (int.Parse(textBoxAmount.Text) < 1)
                 textBoxAmount.BorderBrush = Brushes.Red;
-
+            else if (TemporaryVariableBool)
+            {
+                textBoxAmount.BorderBrush = Brushes.Red;
+                textBoxAmount.ToolTip = "На складе нет такого количества товара!";
+            }
             else
             {
-                List<VideoCard> videoCards = db.VideoCards.ToList();
-                foreach (var item in videoCards)
+                string str = CardList.Text, number = textBoxAmount.Text;
+                await Task.Run(() =>
                 {
-                    if (item.CardName == CardList.Text)
-                        item.Amount += Convert.ToInt32(textBoxAmount.Text);
-                }
-                db.TradeTransactions.Add(new TradeTransaction(CardList.Text, $"{numberList.Text}.{monthList.Text}.{yearsList.Text}", "Добавлено", Convert.ToInt32(textBoxAmount.Text)));
+                    List<VideoCard> videoCards = db.VideoCards.ToList();
+                    foreach (var item in videoCards)
+                    {
+                        if (item.CardName == str)
+                        {
+                            if ((item.Amount -= Convert.ToInt32(number)) >= 0)
+                            {
+                                item.Amount -= Convert.ToInt32(number);
+                            }
+                            
+                        }    
+                            
+                    }
+                });
+                db.TradeTransactions.Add(new TradeTransaction(CardList.Text, $"{numberList.Text}.{monthList.Text}.{yearsList.Text}", "Отгружено", Convert.ToInt32(textBoxAmount.Text)));
                 db.SaveChanges();
                 ClearTextComboBox();
             }
+        }
+        private async Task<bool> CheckForNegationAsync(string name, string count)
+        {
+            return await Task.Run(() => CheckForNegation(name, count));
+        }
+        private bool CheckForNegation(string name, string count)
+        {
+            List<VideoCard> videoCards = db.VideoCards.ToList();
+            foreach (var item in videoCards)
+            {
+                if (item.CardName == name)
+                {
+                    if ((item.Amount -= Convert.ToInt32(count)) >= 0)
+                        return false;
+                    else
+                        return true;
+                }
+            }
+            return true;
         }
         private void ClearComboBoxBorderBrush()
         {
@@ -92,6 +127,7 @@ namespace Pixel
             yearsList.BorderBrush = Brushes.Transparent;
             CardList.BorderBrush = Brushes.Transparent;
             textBoxAmount.BorderBrush = Brushes.Transparent;
+            textBoxAmount.ToolTip = null;
         }
         private void ClearTextComboBox()
         {

@@ -24,10 +24,14 @@ namespace Pixel
         {
             InitializeComponent();
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             db = new ApplicationContext();
-            List<TradeTransaction> tradeTransactions = db.TradeTransactions.ToList();
+            List<TradeTransaction> tradeTransactions = new List<TradeTransaction>();
+            await Task.Run(() => 
+            {
+                tradeTransactions = db.TradeTransactions.ToList();
+            });
             listView.ItemsSource = tradeTransactions;
         }
         private void Button_Report_Click(object sender, RoutedEventArgs e)

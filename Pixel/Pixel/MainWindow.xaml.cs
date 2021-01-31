@@ -58,15 +58,14 @@ namespace Pixel
         }
         private bool LoginVerification(string log)
         {
-            ApplicationContext db = new ApplicationContext();
-            List<VideoCard> cards = db.VideoCards.ToList();
-
-            foreach (var i in cards)
-            {
-                if (i.CardName == log)
-                    return true;
-            }
-            return false;
+                ApplicationContext db = new ApplicationContext();
+                List<VideoCard> cards = db.VideoCards.ToList();
+                foreach (var i in cards)
+                {
+                    if (i.CardName == log)
+                        return true;
+                }
+                return false;
         }
         private void ClearBox()
         {
