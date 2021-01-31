@@ -32,11 +32,11 @@ namespace Pixel
             ClearAuto();
             if (textBoxName.Text.Length == 0)
                 textBoxName.BorderBrush = Brushes.Red;
-            //else if (LoginVerification(textBoxName.Text))
-            //{
-            //    textBoxName.BorderBrush = Brushes.Red;
-            //    textBoxName.ToolTip = "Имя уже занято!";
-            //}
+            else if (LoginVerification(textBoxName.Text))
+            {
+                textBoxName.BorderBrush = Brushes.Red;
+                textBoxName.ToolTip = "Имя уже занято!";
+            }
             else if (textBoxModelGPU.Text.Length == 0)
                 textBoxModelGPU.BorderBrush = Brushes.Red;
             else if (textBoxGPUFrequency.Text.Length == 0)
