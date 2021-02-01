@@ -27,7 +27,7 @@ namespace Pixel
             set
             {
                 modelGpu = value;
-                OnPropertyChanged("CardName");
+                OnPropertyChanged("ModelGpu");
             }
         }
 
@@ -37,7 +37,7 @@ namespace Pixel
             set
             {
                 frequencyGpu = value;
-                OnPropertyChanged("CardName");
+                OnPropertyChanged("FrequencyGpu");
             }
         }
         public string FloatMemory
@@ -46,7 +46,7 @@ namespace Pixel
             set
             {
                 floatMemory = value;
-                OnPropertyChanged("CardName");
+                OnPropertyChanged("FloatMemory");
             }
         }
         public string TypeMemory
@@ -55,7 +55,7 @@ namespace Pixel
             set
             {
                 typeMemory = value;
-                OnPropertyChanged("CardName");
+                OnPropertyChanged("TypeMemory");
             }
         }
         public string TechnicalProcess
@@ -64,7 +64,7 @@ namespace Pixel
             set
             {
                 technicalProcess = value;
-                OnPropertyChanged("CardName");
+                OnPropertyChanged("TechnicalProcess");
             }
         }
         public string Price
@@ -73,7 +73,7 @@ namespace Pixel
             set
             {
                 price = value;
-                OnPropertyChanged("CardName");
+                OnPropertyChanged("Price");
             }
         }
         public int Amount { get; set; }
