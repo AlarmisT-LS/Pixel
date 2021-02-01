@@ -93,6 +93,9 @@
     <Compile Include="ShipmentWindow.xaml.cs">
       <DependentUpon>ShipmentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StartWindow.xaml.cs">
+      <DependentUpon>StartWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TradeTransactions.cs" />
     <Compile Include="VideoCard.cs" />
     <Page Include="AdmissionWindow.xaml">
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ShipmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
