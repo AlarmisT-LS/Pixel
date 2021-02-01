@@ -25,6 +25,18 @@ namespace Pixel
         {
             InitializeComponent();
             db = new ApplicationContext();
+
+            //TODO Создано разработчиком для тестирования и отладки
+            //List<VideoCard> it = db.VideoCards.ToList();
+            //foreach (var i in it)
+            //{
+            //    if (i.Price == "180 000р")
+            //    {
+            //        db.VideoCards.Remove(i);
+            //    }
+            //}
+            //db.SaveChanges();
+            
         }
 
         private void Button_AddProduct_Click(object sender, RoutedEventArgs e)
@@ -49,6 +61,11 @@ namespace Pixel
                 textBoxTechnicalProcess.BorderBrush = Brushes.Red;
             else if (textBoxCostMoney.Text.Length == 0)
                 textBoxTechnicalProcess.BorderBrush = Brushes.Red;
+            else if (Convert.ToInt32(textBoxCostMoney.Text) < 1)
+            {
+                textBoxCostMoney.ToolTip = "Стоимость не может быть 0 и меньше";
+                textBoxCostMoney.BorderBrush = Brushes.Red;
+            }
             else
             {
                 db.VideoCards.Add(new VideoCard(textBoxName.Text, textBoxModelGPU.Text, textBoxGPUFrequency.Text, textBoxVolueMemory.Text, textBoxTypeMemory.Text, textBoxTechnicalProcess.Text, textBoxCostMoney.Text));
