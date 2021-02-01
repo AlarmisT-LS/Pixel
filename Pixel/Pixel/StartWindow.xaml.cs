@@ -29,5 +29,10 @@ namespace Pixel
             inputWindow.Show();
             Close();
         }
+
+        private void Button_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

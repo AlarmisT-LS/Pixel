@@ -17,7 +17,8 @@
                 <TextBlock Text="Приветствуем вас в PIXEL :D" FontSize="30" FontWeight="Bold" Margin="0 0 0 20"/>
                 <TextBlock Text="Создатель: Прасвирин Н.Е" FontSize="20" Margin="0 0 0 10"/>
                 <TextBlock Text="Группа: ПКС-118" FontSize="20" Margin="0 0 0 20"/>
-                <Button x:Name="regButton" Content="Начать" Margin="0 100" Click="Button_Start_Click"/>
+                <Button Content="Начать" Margin="0 67 0 0" Click="Button_Start_Click"/>
+                <Button Content="Выход :(" Margin="0 15 0 0" Click="Button_Exit_Click"/>
             </StackPanel>
         </Border>
 
