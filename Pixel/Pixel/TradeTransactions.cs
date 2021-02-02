@@ -12,7 +12,11 @@ namespace Pixel
     {
         public int Id { get; set; }
         public int Amount { get; set; }
-        private string cardName, date, statuse;
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
+        //public int Itemsize { get; set; }
+        private string cardName, statuse;
 
         public string CardName
         {
@@ -21,15 +25,6 @@ namespace Pixel
             {
                 cardName = value;
                 OnPropertyChanged("CardName");
-            }
-        }
-        public string Date
-        {
-            get { return date; }
-            set
-            {
-                date = value;
-                OnPropertyChanged("Date");
             }
         }
         public string Status
@@ -46,12 +41,16 @@ namespace Pixel
 
         public TradeTransaction() { }
 
-        public TradeTransaction(string cardName, string date, string status, int amount)
+        public TradeTransaction(string cardName, int day, int month, int year, string status, int amount)
         {
+            Day = day;
+            Month = month;
+            Year = year;
             CardName = cardName;
-            Date = date;
             Status = status;
             Amount = amount;
+            //int itemsize
+            //Itemsize = itemsize;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

@@ -27,16 +27,22 @@ namespace Pixel
             db = new ApplicationContext();
 
             //TODO Создано разработчиком для тестирования и отладки
+
+
             //List<VideoCard> it = db.VideoCards.ToList();
-            //foreach (var i in it)
+            //foreach (var l in it)
             //{
-            //    if (i.Price == "180 000р")
-            //    {
-            //        db.VideoCards.Remove(i);
-            //    }
+
+            //    db.VideoCards.Remove(l);
+
+            //}
+            //List<TradeTransaction> t = db.TradeTransactions.ToList();
+            //foreach (var i in t)
+            //{
+            //    db.TradeTransactions.Remove(i);
             //}
             //db.SaveChanges();
-            
+
         }
 
         private void Button_AddProduct_Click(object sender, RoutedEventArgs e)
@@ -75,14 +81,14 @@ namespace Pixel
         }
         private bool LoginVerification(string log)
         {
-                ApplicationContext db = new ApplicationContext();
-                List<VideoCard> cards = db.VideoCards.ToList();
-                foreach (var i in cards)
-                {
-                    if (i.CardName == log)
-                        return true;
-                }
-                return false;
+            ApplicationContext db = new ApplicationContext();
+            List<VideoCard> cards = db.VideoCards.ToList();
+            foreach (var i in cards)
+            {
+                if (i.CardName == log)
+                    return true;
+            }
+            return false;
         }
         private void ClearBox()
         {

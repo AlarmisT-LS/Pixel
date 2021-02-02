@@ -27,15 +27,23 @@
                 <DropShadowEffect BlurRadius="30 " Color="LightGray" ShadowDepth="0"/>
             </Border.Effect>
             <StackPanel>
-                <TextBlock x:Name="loginTextBlock" Text="Представление изменения количества товара" FontSize="30" FontWeight="Bold" Margin="15 0 0 10"/>
+                <TextBlock x:Name="textD" Text="Представление изменения количества товара" FontSize="30" FontWeight="Bold" Margin="15 0 0 10"/>
+                <TextBlock Text="Выберите месяц и год:" FontSize="20" Margin="15 15 15 0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="600" Height="70" Margin="15 0 0 -20">
+                    <ComboBox Name="monthList" Height="40" Width="150" Margin="0 15 5 15" FontSize="18" HorizontalAlignment="Left" 
+                          materialDesign:HintAssist.Hint="Месяц"/>
+                    <ComboBox Name="yearsList" Height="40" Width="150" Margin="0 15 5 15" FontSize="18" HorizontalAlignment="Left" 
+                          materialDesign:HintAssist.Hint="Год"/>
+                    <Button x:Name="Search" Height="40" Width="140" Margin="15 0 0 0" Content="Найти" FontSize="18" Click="Search_Click"/>
+                </StackPanel>
                 <ListView ItemsSource="{Binding}" Name="listView" Margin="15" Style="{StaticResource MaterialDesignListView}">
                     <ListView.View>
                         <GridView>
                             <GridView.Columns >
-                                <GridViewColumn  Width="150" DisplayMemberBinding="{Binding Date}">Дата</GridViewColumn>
-                                <GridViewColumn  Width="600" DisplayMemberBinding="{Binding CardName}">Название</GridViewColumn>
-                                <GridViewColumn  Width="200" DisplayMemberBinding="{Binding Status}">Статус</GridViewColumn>
-                                <GridViewColumn  Width="200" DisplayMemberBinding="{Binding Amount}">Количество</GridViewColumn>
+                                <GridViewColumn  Width="150" DisplayMemberBinding="{Binding Day}">Число</GridViewColumn>
+                                <!--<GridViewColumn  Width="600" DisplayMemberBinding="{Binding CardName}">Название</GridViewColumn>-->
+                                <!--<GridViewColumn  width="200" displaymemberbinding="{binding status}">статус</GridViewColumn>-->
+                                <GridViewColumn  Width="200" DisplayMemberBinding="{Binding Amount}">Количество товара</GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>

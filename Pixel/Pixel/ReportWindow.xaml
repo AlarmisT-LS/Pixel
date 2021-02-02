@@ -33,8 +33,8 @@
                     <ListView.View>
                         <GridView>
                             <GridView.Columns >
-                                <GridViewColumn  Width="150" DisplayMemberBinding="{Binding Id}">Номер</GridViewColumn>
-                                <GridViewColumn  Width="600" DisplayMemberBinding="{Binding CardName}">Название</GridViewColumn>
+                                <GridViewColumn  Width="100" DisplayMemberBinding="{Binding Id}">Id</GridViewColumn>
+                                <GridViewColumn  Width="400" DisplayMemberBinding="{Binding CardName}">Название</GridViewColumn>
                                 <GridViewColumn  Width="200" DisplayMemberBinding="{Binding Price}">Цена</GridViewColumn>
                                 <GridViewColumn  Width="200" DisplayMemberBinding="{Binding Amount}">В наличии</GridViewColumn>
                             </GridView.Columns>
