@@ -41,8 +41,6 @@
                         <GridView>
                             <GridView.Columns >
                                 <GridViewColumn  Width="150" DisplayMemberBinding="{Binding Day}">Число</GridViewColumn>
-                                <!--<GridViewColumn  Width="600" DisplayMemberBinding="{Binding CardName}">Название</GridViewColumn>-->
-                                <!--<GridViewColumn  width="200" displaymemberbinding="{binding status}">статус</GridViewColumn>-->
                                 <GridViewColumn  Width="200" DisplayMemberBinding="{Binding Amount}">Количество товара</GridViewColumn>
                             </GridView.Columns>
                         </GridView>

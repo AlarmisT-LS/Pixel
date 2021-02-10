@@ -41,9 +41,6 @@ namespace Pixel
             });
             monthList.ItemsSource = listMonths;
             yearsList.ItemsSource = listYears;
-
-
-
         }
 
         private async void Search_Click(object sender, RoutedEventArgs e)
@@ -90,10 +87,11 @@ namespace Pixel
                                 locker = -1;
                             }
                             sum += tradeTransactions[i].Amount;
+                            tradeTransactions[idSave].Amount = sum;
                             if (cost != 0)
                             {
                                 listRemove.Add(tradeTransactions[i]);
-                                tradeTransactions[idSave].Amount = sum;
+                                
                             }
                             cost++;
                         }

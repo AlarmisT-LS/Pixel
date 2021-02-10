@@ -15,7 +15,6 @@ namespace Pixel
         public int Day { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
-        //public int Itemsize { get; set; }
         private string cardName, statuse;
 
         public string CardName
@@ -49,8 +48,6 @@ namespace Pixel
             CardName = cardName;
             Status = status;
             Amount = amount;
-            //int itemsize
-            //Itemsize = itemsize;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

@@ -93,13 +93,8 @@ namespace Pixel
                     {
                         if (item.CardName == str)
                         {
-                            if ((item.Amount - Convert.ToInt32(number)) >= 0)
-                            {
-                                item.Amount -= Convert.ToInt32(number);
-                            }
-
+                            item.Amount -= Convert.ToInt32(number);
                         }
-
                     }
                 });
                 db.TradeTransactions.Add(new TradeTransaction(CardList.Text, Convert.ToInt32(numberList.Text), Convert.ToInt32(monthList.Text), Convert.ToInt32(yearsList.Text), "Отгружено", Convert.ToInt32($"-{textBoxAmount.Text}")));
@@ -118,7 +113,7 @@ namespace Pixel
             {
                 if (item.CardName == name)
                 {
-                    if ((item.Amount -= Convert.ToInt32(count)) >= 0)
+                    if ((item.Amount - Convert.ToInt32(count)) >= 0)
                         return false;
                     else
                         return true;

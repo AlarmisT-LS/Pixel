@@ -105,7 +105,6 @@ namespace Pixel
                 textBoxAmount.BorderBrush = Brushes.Red;
             else if (int.Parse(textBoxAmount.Text) < 1)
                 textBoxAmount.BorderBrush = Brushes.Red;
-
             else
             {
                 string str = CardList.Text, number = textBoxAmount.Text;
