@@ -32,9 +32,7 @@ namespace Pixel
             //List<VideoCard> it = db.VideoCards.ToList();
             //foreach (var l in it)
             //{
-
             //    db.VideoCards.Remove(l);
-
             //}
             //List<TradeTransaction> t = db.TradeTransactions.ToList();
             //foreach (var i in t)

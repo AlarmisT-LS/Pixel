@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LiveCharts;
 
 namespace Pixel
 {
@@ -21,14 +22,23 @@ namespace Pixel
     {
         private ApplicationContext db;
         private string month, year;
+        public ChartValues<int> Values2 { get; set; }
+        public string[] Labels { get; set; }
+
         public PerformanceWindow()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+        public PerformanceWindow(ChartValues<int> value)
+        {
+            InitializeComponent();
+            Values2 = value;
+            DataContext = this;
         }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-
+            Labels = new[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", };
             List<int> listMonths = new List<int>();
             List<int> listYears = new List<int>();
 
@@ -48,20 +58,27 @@ namespace Pixel
             db = new ApplicationContext();
             List<TradeTransaction> tradeTransactions = new List<TradeTransaction>();
             List<TradeTransaction> list = db.TradeTransactions.ToList();
+            //tradeTransactions.Add(new TradeTransaction());
             month = monthList.Text;
             year = yearsList.Text;
             await Task.Run(() =>
             {
                 list = db.TradeTransactions.ToList();
-                int sum = 0;
+                int sum = 0; bool locked = true;
                 for (int j = 1; j <= 31; j++)
                 {
+                    locked = true;
                     foreach (var i in list)
                     {
                         if (i.Day == j && i.Month.ToString() == month && i.Year.ToString() == year)
                         {
                             tradeTransactions.Add(i);
+                            locked = false;
                         }
+                    }
+                    if (locked)
+                    {
+                        tradeTransactions.Add(new TradeTransaction() { Amount = int.MinValue, Day = j, Month = Convert.ToInt32(month) }) ;
                     }
                 }
                 //size проверочный день
@@ -69,11 +86,10 @@ namespace Pixel
                 //cost запоминает сколько повторяющихся дней
                 //IdSave запоминает индекс первого попавшегося дня
                 //locker блокирует idSave
-                int size = 0, cost = 0, idSave = 0, locker = 0;
+                int size = 1, cost = 0, idSave = 0, locker = 0;
                 List<TradeTransaction> listRemove = new List<TradeTransaction>();
                 while (size <= 31)
                 {
-                    size++;
                     cost = 0;
                     locker = 0;
                     idSave = 0;
@@ -86,7 +102,14 @@ namespace Pixel
                                 idSave = i;
                                 locker = -1;
                             }
-                            sum += tradeTransactions[i].Amount;
+                            if (tradeTransactions[i].Amount == int.MinValue)
+                            {
+                                tradeTransactions[i].Amount = sum;
+                            }
+                            else
+                            {
+                                sum += tradeTransactions[i].Amount;
+                            }
                             tradeTransactions[idSave].Amount = sum;
                             if (cost != 0)
                             {
@@ -96,6 +119,11 @@ namespace Pixel
                             cost++;
                         }
                     }
+                    //if (cost == 0)
+                    //{
+                    //    tradeTransactions.Add(new TradeTransaction() { Amount = sum, Day = size, Month = Convert.ToInt32(month) });
+                    //}
+                    size++;
                 }
                 //Удаление ненужных элементов
                 foreach (var i in listRemove)
@@ -103,7 +131,18 @@ namespace Pixel
                     tradeTransactions.Remove(i);
                 }
             });
-            listView.ItemsSource = tradeTransactions;
+
+
+            ChartValues<int> result = new ChartValues<int>();
+            foreach (var i in tradeTransactions)
+            {
+                result.Add(i.Amount);
+            }
+            Values2 = result;
+
+            PerformanceWindow performanceWindow = new PerformanceWindow(Values2);
+            performanceWindow.Show();
+            Close();
         }
         private void Button_Report_Click(object sender, RoutedEventArgs e)
         {
