@@ -28,7 +28,10 @@ namespace Pixel
         {
             //Добовление листа видеокарт 
             List<string> listCard = new List<string>();
-            List<string> listNumber = new List<string>();
+            List<int> listNumbers = new List<int>();
+            List<int> listMonths = new List<int>();
+            List<int> listYears = new List<int>();
+
             db = new ApplicationContext();
             await Task.Run(() =>
             {
@@ -46,12 +49,16 @@ namespace Pixel
             await Task.Run(() =>
             {
                 for (int i = 1; i <= 31; i++)
-                    listNumber.Add(i.ToString());
+                    listNumbers.Add(i);
+                for (int i = 1; i <= 12; i++)
+                    listMonths.Add(i);
+                for (int i = 2021; i <= 2077; i++)
+                    listYears.Add(i);
             });
             CardList.ItemsSource = listCard;
-            numberList.ItemsSource = listNumber;
-            monthList.ItemsSource = new List<string>() { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
-            yearsList.ItemsSource = new List<string>() { "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" };
+            numberList.ItemsSource = listNumbers;
+            monthList.ItemsSource = listMonths;
+            yearsList.ItemsSource = listYears;
         }
         private async void Button_Add_Click(object sender, RoutedEventArgs e)
         {
@@ -86,16 +93,11 @@ namespace Pixel
                     {
                         if (item.CardName == str)
                         {
-                            if ((item.Amount -= Convert.ToInt32(number)) >= 0)
-                            {
-                                item.Amount -= Convert.ToInt32(number);
-                            }
-                            
-                        }    
-                            
+                            item.Amount -= Convert.ToInt32(number);
+                        }
                     }
                 });
-                db.TradeTransactions.Add(new TradeTransaction(CardList.Text, $"{numberList.Text}.{monthList.Text}.{yearsList.Text}", "Отгружено", Convert.ToInt32(textBoxAmount.Text)));
+                db.TradeTransactions.Add(new TradeTransaction(CardList.Text, Convert.ToInt32(numberList.Text), Convert.ToInt32(monthList.Text), Convert.ToInt32(yearsList.Text), "Отгружено", Convert.ToInt32($"-{textBoxAmount.Text}")));
                 db.SaveChanges();
                 ClearTextComboBox();
             }
@@ -111,7 +113,7 @@ namespace Pixel
             {
                 if (item.CardName == name)
                 {
-                    if ((item.Amount -= Convert.ToInt32(count)) >= 0)
+                    if ((item.Amount - Convert.ToInt32(count)) >= 0)
                         return false;
                     else
                         return true;

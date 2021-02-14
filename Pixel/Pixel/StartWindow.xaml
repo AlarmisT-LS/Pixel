@@ -21,6 +21,5 @@
                 <Button Content="Выход :(" Margin="0 15 0 0" Click="Button_Exit_Click"/>
             </StackPanel>
         </Border>
-
     </Grid>
 </Window>
